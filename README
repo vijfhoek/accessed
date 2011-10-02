@@ -1,1 +1,14 @@
 == Accessed Readme file ==
+Accessed is a simple plugin to control your server using sockets.
+
+== Socket Commands ==
+The commands you can send to TCP port 7040:
+* reload <plugin>      - Reloads the given plugin. Do NOT reload Accessed with this.
+* reloadall            - Reloads all plugins, except Accessed.
+* command <command>    - Executes the given command. "command reload" won't reload Accessed.
+
+The commands I am planning to add:
+* say <message>                    - Broadcasts the message over the console
+* kick <user> (r:reason)           - Kicks the user (with the given reason, if given)
+* ban <user> <period> (r:reason)   - Bans the user (with the given reason, if given)
+                                       (for unlimited time, set period to 0)
