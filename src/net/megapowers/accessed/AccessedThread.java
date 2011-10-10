@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -98,6 +99,28 @@ public class AccessedThread extends Thread {
 						} catch (Exception ex) {
 							writer.println("failed");
 						} 
+					} else if (inputLineSplit[0].equalsIgnoreCase("list")) {
+						 try {
+                             Player[] players = server.getOnlinePlayers();
+                             String out = new String();
+                             
+                             if (players.length != 0) {
+                             //for each player
+                             for(Player player : players) {
+                                 //append name to output
+                                 out += player.getName() + ",";
+                             }
+                             
+                             out = out.substring(0, out.length() - 2);
+                             
+                             writer.println(out);
+                             }
+                             
+                             writer.println("done");
+                         }
+                         catch (Exception ex) {
+                        	 writer.println("failed");
+                         }
 					} else {
 						writer.println("unknown");
 					}
@@ -126,5 +149,19 @@ public class AccessedThread extends Thread {
 			return false;
 		}
 		return true;
+	}
+	
+	void close() {
+		try {
+			running = false;
+			
+			reader.close(); reader = null;
+			writer.close(); writer = null;
+			clientSocket.close(); clientSocket = null;
+			serverSocket.close(); serverSocket = null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

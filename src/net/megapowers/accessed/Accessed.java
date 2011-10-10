@@ -11,7 +11,7 @@ public class Accessed extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		reloadedThread.running = false;
+		reloadedThread.close();
 		Logger.getLogger("Minecraft").info("[Accessed] Waiting 2 seconds for the socket to close");
 		try {
 			Thread.sleep(2000);
